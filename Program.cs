@@ -1,10 +1,20 @@
+using MudBlazor.Services;
 using SmartClassComment.Components;
+using SmartComponents.Inference.OpenAI;
+using SmartComponents.LocalEmbeddings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddMudServices();
+
+builder.Services.AddSmartComponents()
+    .WithInferenceBackend<OpenAIInferenceBackend>();
+
+builder.Services.AddSingleton<LocalEmbedder>();
 
 var app = builder.Build();
 

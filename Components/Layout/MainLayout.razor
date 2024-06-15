@@ -1,23 +1,32 @@
-﻿@inherits LayoutComponentBase
+﻿@page "/"
+@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<MudThemingProvider @rendermode="InteractiveServer" />
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h5" Class="ml-3">Smart Class Comment</MudText>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/jichao99/SmartClassComment" Target="_blank" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="3">
+        <MudNavMenu Bordered="true">
+            <MudNavLink Match="NavLinkMatch.All" Disabled Href="/" Icon="@Icons.Material.Filled.ContentPaste" IconColor="Color.Inherit">Smart Paste</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Disabled Href="/" Icon="@Icons.Material.Filled.EditNote" IconColor="Color.Inherit">Smart TextArea</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Disabled Href="/" Icon="@Icons.Material.Filled.Search" IconColor="Color.Inherit">Smart ComboBox</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/classComment" Icon="@Icons.Material.Filled.AddComment" IconColor="Color.Inherit">课堂点评</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent>
             @Body
-        </article>
-    </main>
-</div>
+    </MudMainContent>
+</MudLayout>
+@code {
+    bool _drawerOpen = true;
 
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
-</div>
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}

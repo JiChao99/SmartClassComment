@@ -1,0 +1,116 @@
+﻿@page "/classComment"
+
+<h3>课堂点评</h3>
+<form>
+    <fieldset>
+        <legend>参与度</legend>
+        <div class="form-group">
+            <MudRating SelectedValue="@ParticipationLevel" Size="Size.Medium" />
+            <input data-smartpaste-description="参与度分数（0~5）" id="ParticipationLevel" type="text"
+                @bind-value="@ParticipationLevel" hidden />
+        </div>
+        <div class="form-group">
+            <label for="ParticipationLevelDescription">点评</label>
+            <input type="text" id="ParticipationLevelDescription" required />
+        </div>
+    </fieldset>
+
+
+    <fieldset>
+        <legend>专注度</legend>
+        <div class="form-group">
+            <MudRating SelectedValue="@FocusLevel" Size="Size.Medium" />
+            <input data-smartpaste-description="专注度分数（0~5）" id="FocusLevel" type="text" @bind-value="FocusLevel"
+                hidden />
+        </div>
+        <div class="form-group">
+            <label for="FocusLevelDescription">点评</label>
+            <input type="text" id="FocusLevelDescription" required />
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>学习态度</legend>
+        <div class="form-group">
+            <MudRating SelectedValue="@AttitudeTowardsLearning" Size="Size.Medium" />
+            <input data-smartpaste-description="学习态度分数（0~5）" id="AttitudeTowardsLearning" type="text"
+                @bind-value="@AttitudeTowardsLearning" hidden />
+        </div>
+        <div class="form-group">
+            <label for="AttitudeTowardsLearningDescription">点评</label>
+            <input type="text" id="AttitudeTowardsLearningDescription" required />
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>课堂表现</legend>
+        <div class="form-group">
+            <MudRating SelectedValue="@ClassroomPerformance" Size="Size.Medium" />
+            <input data-smartpaste-description="课堂表现分数（0~5）" id="ClassroomPerformance" type="text"
+                @bind-value="@ClassroomPerformance" hidden />
+        </div>
+        <div class="form-group">
+            <label for="ClassroomPerformanceDescription">点评</label>
+            <input type="text" id="ClassroomPerformanceDescription" required />
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>总体评价</legend>
+        <SmartTextArea class="smart-text-area" UserRole="@userRole" UserPhrases="@userPhrases" @bind-Value="@comment"
+            placeholder="对学员进行总体评价" autofocus />
+    </fieldset>
+
+    <div class="buttons-container">
+        <SmartPasteButton DefaultIcon class="default-button secondary flex-button">智能点评</SmartPasteButton>
+        <button class="default-button flex-button">提交点评</button>
+    </div>
+
+</form>
+
+<br />
+
+<h3 class="mb-4">示例内容（双击可复制）</h3>
+
+<div class="sample-content-container">
+    <div class="sample-content" spellcheck="false" contenteditable>
+        张三今天表现良好。虽然他在课堂上保持了较高的专注度，并对课堂内容有一定的掌握，但在讨论环节中缺乏积极性，需要更多的鼓励和引导。
+    </div>
+    <div class="sample-content" spellcheck="false" contenteditable>
+        本次课堂，张三的表现非常出色。他积极参与讨论，提出了深入的问题，给整个班级带来了启发。在小组活动中，他展现出了出色的团队合作能力，与同学们密切配合，完成了任务。
+    </div>
+    <div class="sample-content" spellcheck="false" contenteditable>
+        今天的课堂上，张三的表现一般。尽管他保持了一定的专注度，但在讨论和小组活动中的参与度不够，需要进一步提高。
+    </div>
+</div>
+
+@code {
+    private string? comment;
+    private int ParticipationLevel;
+    private int FocusLevel;
+    private int AttitudeTowardsLearning;
+    private int ClassroomPerformance;
+    private readonly string userRole = "上课老师对学生进行课堂点评";
+
+    private readonly string[] userPhrases =
+    [
+        @"老师点评常用语：
+学生在课堂上表现积极，经常主动回答问题，展现出良好的参与度；
+学生的专注力较高，能够保持注意力集中，认真听讲，思维清晰。
+学生态度端正，对学习充满热情，乐于接受新知识和挑战。
+学生的课堂表现令人满意，表现出自信和积极的态度。
+学生与同学之间合作默契，展现出良好的团队合作精神和沟通能力。
+学生勤奋好学，作业认真完成，主动查漏补缺，取得了可喜的进步。
+学生对老师和同学尊重礼貌，与同学友好相处，形成了良好的班级氛围。
+学生有时缺乏自信，但在老师的鼓励下能够逐渐展现出自己的实力。",
+@"对于该学员最近三次点评：第一次上课点评：
+时间： 2024年6月1日
+综合评价： 张三在本次课堂上表现出色，积极参与讨论，提出了许多有建设性的问题，展现出了较高的学习兴趣和思维活跃度。
+第二次上课点评：
+时间： 2024年6月8日
+综合评价： 张三的表现再次令人满意，与上次相比有所提升，积极参与课堂活动，对老师提出的问题能够给出清晰的回答和见解。
+第三次上课点评：
+时间： 2024年6月15日
+综合评价： 张三的表现再次有所提升，课堂参与度更高，表现出了更强的自信心，整体呈现出向好的趋势。"
+    ];
+}
